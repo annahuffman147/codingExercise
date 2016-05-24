@@ -1,0 +1,21 @@
+{
+  "name": "codingexercise",
+  "version": "1.0.0",
+  "description": "Coding Exercises for CrownPeak interview process. Due May 31, 2016",
+  "main": "main.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/annahuffman147/codingExercise.git"
+  },
+  "author": "Anna Huffman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/annahuffman147/codingExercise/issues"
+  },
+  "homepage": "https://github.com/annahuffman147/codingExercise#readme"
+}
