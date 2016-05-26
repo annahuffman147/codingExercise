@@ -4,7 +4,10 @@
   "description": "Coding Exercises for CrownPeak interview process. Due May 31, 2016",
   "main": "main.js",
   "dependencies": {},
-  "devDependencies": {},
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.5.3"
+  },
   "scripts": {
     "test": "mocha"
   },
