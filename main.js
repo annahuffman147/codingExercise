@@ -17,9 +17,11 @@ module.exports = {
 
   singleDigitToWord: function (digit) {
     var singleDigits = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
-    if (digit.length === 1) {
-      console.log(digit + 'is a single digit');
+    console.log(digit);
+    if (digit.length = 1) {
+      console.log(digit + " is a single digit");
       digit = singleDigits[digit]
+      console.log(digit);
       return singleDigits[digit]
     }
   }
