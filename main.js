@@ -1,17 +1,20 @@
+var singleDigits = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
+var tenToNineteen = ['ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen']
+var tensPlace = ['', 'teens?', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety']
 
 
 module.exports = {
 
-  changeFromString: function (number) {
+  changeToString: function (number) {
     console.log(typeof number);
-    if (typeof number === 'string') {
-      number = parseInt(number, 10);
+    if (typeof number !== 'string') {
+      number = number.toString();
       console.log(number);
       console.log(typeof number);
       return number;
     } else {
-      console.log(number + " is Not a string");
-      return 'not a string'
+      console.log(number + " is a string");
+      return 'is a string'
     }
   },
 
