@@ -25,9 +25,9 @@ describe('singleDigitToWord', function(){
   })
 });
 
-// describe('cents to fraction', function(){
-//   it('change cents to fraction', function(){
-//     expect(code.splitOnDecimal(['2523', '04'])).to.equal('04/100')
-//     expect(code.splitOnDecimal(['39', '00'])).to.equal('04/100')
-//   })
-// })
+describe('centsToFraction', function(){
+  it('change cents to fraction', function(){
+    expect(code.splitOnDecimal('04'), '04/100')
+    // expect(code.splitOnDecimal('00')).to.equal('00/100')
+  })
+})

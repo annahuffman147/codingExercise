@@ -1,3 +1,6 @@
+
+
+
 var singleDigits = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
 var tenToNineteen = ['ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen']
 var tensPlace = ['', 'teens?', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety']
@@ -25,19 +28,35 @@ module.exports = {
       console.log(amount);
     }
     var arrayOnDecimal = amount.split('.')
-    console.log(arrayOnDecimal);
-    return arrayOnDecimal
+    amount = arrayOnDecimal
+    console.log(amount);
+    return amount
   },
 
 
   singleDigitToWord: function (digit) {
-    var singleDigits = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
     console.log(digit);
+    console.log(typeof(digit));
+    console.log(digit.length);
     if (digit.length = 1) {
       console.log(digit + " is a single digit");
       digit = singleDigits[digit]
+      console.log(typeof(digit));
       console.log(digit);
-      return singleDigits[digit]
+      return digit
+    } else {
+      return
+    }
+  },
+
+  centsToFraction: function (numerator) {
+    var denominator = '100'
+    if (numerator !== '00') {
+      var fraction = numerator + '/' + denominator
+      console.log(fraction);
+      return fraction
+    } else {
+      return
     }
   }
 
