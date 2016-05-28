@@ -10,16 +10,23 @@ describe('changeToString', function(){
   })
 });
 
-describe('singleDigitToWord', function(){
-  it('should convert a single digit to a word', function(){
-    expect(code.singleDigitToWord('1'), 'one')
-    expect(code.singleDigitToWord('9'), 'nine')
+describe('splitOnDecimal', function(){
+  it('split number on decimal', function(){
+    expect(code.splitOnDecimal('2523.04')).to.equal(['2523', '04'])
+    expect(code.splitOnDecimal('39')).to.equal(['39', '00'])
   })
 });
 
-describe('splitOnDecimal', function(){
-  it('split number on decimal', function(){
-    expect(code.splitOnDecimal('2523.04'), ['2523', '04'])
-    expect(code.splitOnDecimal('39'), ['39'])
+describe('singleDigitToWord', function(){
+  it('should convert a single digit to a word', function(){
+    expect(code.singleDigitToWord('1')).to.equal('one')
+    expect(code.singleDigitToWord('9')).to.equal('nine')
   })
-})
+});
+
+// describe('cents to fraction', function(){
+//   it('change cents to fraction', function(){
+//     expect(code.splitOnDecimal(['2523', '04'])).to.equal('04/100')
+//     expect(code.splitOnDecimal(['39', '00'])).to.equal('04/100')
+//   })
+// })
