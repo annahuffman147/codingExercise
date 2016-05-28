@@ -12,8 +12,8 @@ describe('changeToString', function(){
 
 describe('splitOnDecimal', function(){
   it('split number on decimal', function(){
-    expect(code.splitOnDecimal('2523.04')).to.equal(['2523', '04'])
-    expect(code.splitOnDecimal('39')).to.equal(['39', '00'])
+    expect(code.splitOnDecimal('2523.04'),['2523', '04'])
+    expect(code.splitOnDecimal('39'),['39', '00'])
   })
 });
 
@@ -21,6 +21,7 @@ describe('singleDigitToWord', function(){
   it('should convert a single digit to a word', function(){
     expect(code.singleDigitToWord('1')).to.equal('one')
     expect(code.singleDigitToWord('9')).to.equal('nine')
+    expect(code.singleDigitToWord('99')).to.equal()
   })
 });
 
