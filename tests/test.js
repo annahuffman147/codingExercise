@@ -17,9 +17,9 @@ describe('singleDigitToWord', function(){
   })
 });
 
-// describe('doubleDigitToWord', function(){
-//   it('should convert a double digit that is above 19 to a word', function(){
-//     expect(code.doubleDigitToWord('21'), 'twenty-one')
-//     expect(code.doubleDigitToWord(39), 'thirty-nine')
-//   })
-// })
+describe('splitOnDecimal', function(){
+  it('split number on decimal', function(){
+    expect(code.splitOnDecimal('2523.04'), ['2523', '04'])
+    expect(code.splitOnDecimal('39'), ['39'])
+  })
+})

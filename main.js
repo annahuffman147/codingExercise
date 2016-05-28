@@ -18,6 +18,15 @@ module.exports = {
     }
   },
 
+  splitOnDecimal: function(amount) {
+    if (amount.indexOf('.') == -1) {
+      amount = amount + '.00'
+      console.log(amount);
+    }
+    var arrayOnDecimal = amount.split('.')
+    console.log(arrayOnDecimal);
+  },
+
   singleDigitToWord: function (digit) {
     var singleDigits = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
     console.log(digit);
@@ -28,5 +37,6 @@ module.exports = {
       return singleDigits[digit]
     }
   }
+
 
 }
