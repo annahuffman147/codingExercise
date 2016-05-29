@@ -27,7 +27,7 @@ describe('singleDigitToWord', function(){
 
 describe('centsToFraction', function(){
   it('change cents to fraction', function(){
-    expect(code.splitOnDecimal('04'), '04/100')
-    // expect(code.splitOnDecimal('00')).to.equal('00/100')
+    expect(code.splitOnDecimal('04'), 'and 04/100 dollars')
+    expect(code.splitOnDecimal('00')).to.equal('dollars')
   })
-})
+});
