@@ -49,7 +49,6 @@ module.exports = {
     }
   },
 
-//in jsbin it returns correctly, but not hear and the test is still passing?
   centsToFraction: function (numerator) {
     var denominator = '100';
     if (numerator !== '00') {
