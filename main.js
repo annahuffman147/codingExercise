@@ -4,6 +4,7 @@
 var singleDigits = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
 var tenToNineteen = ['ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen']
 var tensPlace = ['', 'ten', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety']
+var labels = ['', 'thousand', 'million', 'billion']
 
 
 module.exports = {
@@ -72,6 +73,26 @@ module.exports = {
     } else {
       twoDigits = tensPlace[twoDigits.substring(0, 1)] + '-' + singleDigits[twoDigits.substring(1)]
       console.log(twoDigits);
+      return
+    }
+  },
+
+  threeDigitsToWord: function (threeDigits){
+    console.log(threeDigits.substring(0, 1));
+    console.log(threeDigits.substring(1, 2));
+    console.log(threeDigits.substring(2));
+
+    if (threeDigits === '000') {
+      console.log(threeDigits);
+      threeDigits = ''
+      console.log(threeDigits);
+      return
+    } else if (threeDigits.substring(0, 2) === '00'){
+      console.log(threeDigits.substring(2));
+      threeDigits = singleDigits[threeDigits.substring(2)]
+      console.log(threeDigits);
+      return
+    } else {
       return
     }
   }

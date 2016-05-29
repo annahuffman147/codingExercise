@@ -31,3 +31,22 @@ describe('centsToFraction', function(){
     expect(code.centsToFraction('00')).to.equal('dollars')
   })
 });
+
+describe('twoDigitsToWord', function(){
+  it('change two digits to words', function(){
+    expect(code.twoDigitsToWord('50'), 'fifty')
+    expect(code.twoDigitsToWord('13'), 'thirteen')
+    expect(code.twoDigitsToWord('65'), 'sixty-five')
+  })
+});
+
+describe('threeDigitsToWord', function(){
+  it('change three digits to words', function(){
+    // expect(code.threeDigitsToWord('050'), 'fifty')
+    // expect(code.threeDigitsToWord('123'), 'one hundred twenty-three')
+    // expect(code.threeDigitsToWord('706'), 'seven hundred six')
+    // expect(code.threeDigitsToWord('300'), 'three hundred')
+    expect(code.threeDigitsToWord('000'), '')
+    expect(code.threeDigitsToWord('003'), 'three')
+  })
+});
