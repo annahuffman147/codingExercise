@@ -81,7 +81,6 @@ module.exports = {
     console.log(threeDigits.substring(0, 1));
     console.log(threeDigits.substring(1, 2));
     console.log(threeDigits.substring(2));
-
     if (threeDigits === '000') {
       console.log(threeDigits);
       threeDigits = ''
@@ -108,6 +107,23 @@ module.exports = {
           return
         }
     } else {
+      if (threeDigits.substring(2) === '0') {
+        threeDigits = singleDigits[threeDigits.substring(0, 1)] + ' hundred ' + tensPlace[threeDigits.substring(1, 2)]
+        console.log(threeDigits);
+        return
+      } else if (threeDigits.substring(1, 2) == '1'){
+        threeDigits = singleDigits[threeDigits.substring(0, 1)] +' hundred ' + tenToNineteen[threeDigits.substring(2)]
+        console.log(threeDigits);
+        return
+      } else if (threeDigits.substring(1, 2) == '0'){
+        threeDigits = singleDigits[threeDigits.substring(0, 1)] +' hundred ' + singleDigits[threeDigits.substring(2)]
+        console.log(threeDigits);
+        return
+      } else {
+        threeDigits = singleDigits[threeDigits.substring(0, 1)] + ' hundred ' + tensPlace[threeDigits.substring(1, 2)] + '-' + singleDigits[threeDigits.substring(2)]
+        console.log(threeDigits);
+        return
+      }
       console.log('nothing worked');
     }
   }
