@@ -34,6 +34,16 @@ module.exports = {
     return amount
   },
 
+  splitDollarAmount: function(amount){
+    if (amount.indexOf('.') == -1) {
+      amount = amount + '.00'
+    }
+    var arrayOnDecimal = amount.split('.')
+    var dollarAmount = arrayOnDecimal[0]
+    var arrayDollarAmount = dollarAmount.split(/(?=(?:...)*$)/)
+    console.log(arrayDollarAmount);
+  },
+
 //this will work on the ones spaces
   singleDigitToWord: function (digit) {
     console.log(digit);
@@ -86,7 +96,7 @@ module.exports = {
       threeDigits = ''
       console.log(threeDigits);
       return
-    } else if (threeDigits.substring(0, 2) === '00'){
+    } else if (threeDigits.substring(0, 2) === '00') {
       console.log(threeDigits.substring(2));
       threeDigits = singleDigits[threeDigits.substring(2)]
       console.log(threeDigits);

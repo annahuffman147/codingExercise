@@ -17,6 +17,13 @@ describe('splitOnDecimal', function(){
   })
 });
 
+describe('splitDollarAmount', function(){
+  it('split dollar amount into groups of three', function(){
+    expect(code.splitDollarAmount('2523.04'),['2','523', '04'])
+    expect(code.splitDollarAmount('3432983.72'),['3', '432', '983', '72'])
+  })
+});
+
 describe('singleDigitToWord', function(){
   it('should convert a single digit to a word', function(){
     expect(code.singleDigitToWord('1')).to.equal('one')
