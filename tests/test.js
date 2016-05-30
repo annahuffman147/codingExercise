@@ -42,7 +42,9 @@ describe('twoDigitsToWord', function(){
 
 describe('threeDigitsToWord', function(){
   it('change three digits to words', function(){
-    // expect(code.threeDigitsToWord('050'), 'fifty')
+    expect(code.threeDigitsToWord('050'), 'fifty')
+    expect(code.threeDigitsToWord('013'), 'thirteen')
+    expect(code.threeDigitsToWord('065'), 'sixty-five')
     // expect(code.threeDigitsToWord('123'), 'one hundred twenty-three')
     // expect(code.threeDigitsToWord('706'), 'seven hundred six')
     // expect(code.threeDigitsToWord('300'), 'three hundred')

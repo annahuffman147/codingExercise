@@ -92,8 +92,23 @@ module.exports = {
       threeDigits = singleDigits[threeDigits.substring(2)]
       console.log(threeDigits);
       return
+    } else if (threeDigits.substring(0, 1)=== '0') {
+      console.log('made it');
+        if (threeDigits.substring(2) === '0') {
+          threeDigits = tensPlace[threeDigits.substring(1, 2)]
+          console.log(threeDigits);
+          return
+        } else if (threeDigits.substring(1, 2) == '1'){
+          threeDigits = tenToNineteen[threeDigits.substring(2)]
+          console.log(threeDigits);
+          return
+        } else {
+          threeDigits = tensPlace[threeDigits.substring(1, 2)] + '-' + singleDigits[threeDigits.substring(2)]
+          console.log(threeDigits);
+          return
+        }
     } else {
-      return
+      console.log('nothing worked');
     }
   }
 
