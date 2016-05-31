@@ -63,6 +63,6 @@ describe('threeDigitsToWord', function(){
 describe('changeDollarArrayToWords', function(){
   it('should iterate over an array and change each index of digits to words', function(){
     expect(code.changeDollarArrayToWords('2523.04'), ['two', 'five hundred twenty-three'])
-    expect(code.splitDollarAmount('3432983.72'), ['three', 'four hundred thirty-two', 'nine hundred eighty-three'])
+    expect(code.changeDollarArrayToWords('3432983.72'), ['three', 'four hundred thirty-two', 'nine hundred eighty-three'])
   })
 })

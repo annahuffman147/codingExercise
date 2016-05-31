@@ -134,11 +134,67 @@ module.exports = {
         console.log(threeDigits);
         return
       }
-      console.log('nothing worked');
+    }
+  },
+
+  changeDollarArrayToWords: function (amount) {
+    if (amount.indexOf('.') == -1) {
+      amount = amount + '.00'
+    }
+    var arrayOnDecimal = amount.split('.')
+    var dollarAmount = arrayOnDecimal[0]
+    var cents = arrayOnDecimal[1]
+    var arrayDollarAmount = dollarAmount.split(/(?=(?:...)*$)/)
+    var arrayDollarWords = []
+
+    var denominator = '100';
+    if (cents !== '00') {
+      var fraction = cents + '/' + denominator
+      cents = ' and ' + fraction + ' dollars'
+    } else {
+      cents = 'dollars'
+    }
+    console.log(arrayDollarAmount)
+
+    for (var i = 0; i <= arrayDollarAmount.length; i++){
+      console.log(arrayDollarWords);
+      if (arrayDollarAmount[i].length === 1) {
+        arrayDollarWords.push(singleDigits[arrayDollarAmount[i]])
+      } else if (arrayDollarAmount[i].length === 2) {
+        if (arrayDollarAmount[i].substring(1) == '0') {
+          arrayDollarWords.push(tensPlace[arrayDollarAmount[i].substring(0, 1)])
+        } else if (arrayDollarAmount[i].substring(0, 1) == '1'){
+          arrayDollarWords.push(tenToNineteen[arrayDollarAmount[i].substring(1)])
+        } else {
+          arrayDollarWords.push(tensPlace[arrayDollarAmount[i].substring(0, 1)] + '-' + singleDigits[arrayDollarAmount[i].substring(1)])
+        }
+      } else {
+        console.log(arrayDollarAmount);
+        if (arrayDollarAmount[i] === '000') {
+          arrayDollarWords.push('')
+        } else if (arrayDollarAmount[i].substring(0, 2) === '00') {
+          arrayDollarWords.push(singleDigits[arrayDollarAmount[i].substring(2)])
+        } else if (arrayDollarAmount[i].substring(0, 1)=== '0') {
+            if (arrayDollarAmount[i].substring(2) === '0') {
+              arrayDollarWords.push(tensPlace[arrayDollarAmount[i].substring(1, 2)])
+            } else if (arrayDollarAmount[i].substring(1, 2) == '1'){
+              arrayDollarWords.push(tenToNineteen[arrayDollarAmount[i].substring(2)])
+            } else {
+              arrayDollarWords.push(tensPlace[arrayDollarAmount[i].substring(1, 2)] + '-' + singleDigits[arrayDollarAmount[i].substring(2)])
+            }
+        } else {
+            if (arrayDollarAmount[i].substring(2) === '0') {
+              arrayDollarWords.push(singleDigits[arrayDollarAmount[i].substring(0, 1)] + ' hundred ' + tensPlace[arrayDollarAmount[i].substring(1, 2)])
+            } else if (arrayDollarAmount[i].substring(1, 2) == '1'){
+              arrayDollarWords.push(singleDigits[arrayDollarAmount[i].substring(0, 1)] +' hundred ' + tenToNineteen[arrayDollarAmount[i].substring(2)])
+            } else if (arrayDollarAmount[i].substring(1, 2) == '0'){
+              arrayDollarWords.push(singleDigits[arrayDollarAmount[i].substring(0, 1)] +' hundred ' + singleDigits[arrayDollarAmount[i].substring(2)])
+            } else {
+              arrayDollarWords.push(singleDigits[arrayDollarAmount[i].substring(0, 1)] + ' hundred ' + tensPlace[arrayDollarAmount[i].substring(1, 2)] + '-' + singleDigits[arrayDollarAmount[i].substring(2)])
+            }
+            console.log(arrayDollarWords);
+        }
+      }
     }
   }
-
-
-
-
 }
