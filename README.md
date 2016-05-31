@@ -17,7 +17,7 @@ dollars"
 | 31.35         | Thirty-one and 35/100 dollars |
 | 2523.04       | Two thousand five hundred twenty-three and 04/100 dollars    | given example
 | 1042.16       | One thousand forty-two and 16/100 dollars    | zero in hundreds place
-| 532           | Five hundred thirty-two and 00/100 dollars   | whole dollar amounts
+| 532           | Five hundred thirty-two dollars   | whole dollar amounts
 | 3432983.72    | Three million four hundred thirty-two thousand nine hundred eighty-three and 72/100 dollars | sets of three digits (i.e. 432,000)
 
 

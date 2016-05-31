@@ -66,3 +66,14 @@ describe('changeDollarArrayToWords', function(){
     expect(code.changeDollarArrayToWords('3432983.72'), ['three million', 'four hundred thirty-two thousand', 'nine hundred eighty-three'])
   })
 })
+
+describe('printFinalResult', function(){
+  it('should print final result', function(){
+    expect(code.printFinalResult('1.58'), 'One and 58/100 dollars')
+    expect(code.printFinalResult('31.35'), 'Thirty-one and 35/100 dollars')
+    expect(code.printFinalResult('2523.04'), 'Two thousand five hundred twenty-three and 04/100 dollars ')
+    expect(code.printFinalResult('1042.16'), 'One thousand forty-two and 16/100 dollars')
+    expect(code.printFinalResult('532'), 'Five hundred thirty-two dollars')
+    expect(code.printFinalResult('3432983.72'), 'Three million four hundred thirty-two thousand nine hundred eighty-three and 72/100 dollars')
+  })
+})
