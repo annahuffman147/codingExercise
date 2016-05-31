@@ -138,6 +138,9 @@ module.exports = {
   },
 
   changeDollarArrayToWords: function (amount) {
+    var arrayOnDecimal = this.splitOnDecimal(amount)
+
+
     if (amount.indexOf('.') == -1) {
       amount = amount + '.00'
     }
@@ -156,7 +159,7 @@ module.exports = {
     }
     console.log(arrayDollarAmount)
 
-    for (var i = 0; i <= arrayDollarAmount.length; i++){
+    for (var i = 0; i <= arrayDollarAmount.length-1; i++){
       console.log(arrayDollarWords);
       if (arrayDollarAmount[i].length === 1) {
         arrayDollarWords.push(singleDigits[arrayDollarAmount[i]])
