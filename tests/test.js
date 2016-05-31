@@ -11,16 +11,16 @@ describe('changeToString', function(){
 });
 
 describe('splitOnDecimal', function(){
-  it('split number on decimal', function(){
+  it('should split number on decimal', function(){
     expect(code.splitOnDecimal('2523.04'),['2523', '04'])
     expect(code.splitOnDecimal('39'),['39', '00'])
   })
 });
 
 describe('splitDollarAmount', function(){
-  it('split dollar amount into groups of three', function(){
-    expect(code.splitDollarAmount('2523.04'),['2','523', '04'])
-    expect(code.splitDollarAmount('3432983.72'),['3', '432', '983', '72'])
+  it('should split dollar amount into groups of three', function(){
+    expect(code.splitDollarAmount('2523.04'),['2','523'])
+    expect(code.splitDollarAmount('3432983.72'),['3', '432', '983'])
   })
 });
 
@@ -33,14 +33,14 @@ describe('singleDigitToWord', function(){
 });
 
 describe('centsToFraction', function(){
-  it('change cents to fraction', function(){
+  it('should change cents to fraction', function(){
     expect(code.centsToFraction('04'), 'and 04/100 dollars')
     expect(code.centsToFraction('00')).to.equal('dollars')
   })
 });
 
 describe('twoDigitsToWord', function(){
-  it('change two digits to words', function(){
+  it('should change two digits to words', function(){
     expect(code.twoDigitsToWord('50'), 'fifty')
     expect(code.twoDigitsToWord('13'), 'thirteen')
     expect(code.twoDigitsToWord('65'), 'sixty-five')
@@ -48,7 +48,7 @@ describe('twoDigitsToWord', function(){
 });
 
 describe('threeDigitsToWord', function(){
-  it('change three digits to words', function(){
+  it('should change three digits to words', function(){
     expect(code.threeDigitsToWord('050'), 'fifty')
     expect(code.threeDigitsToWord('013'), 'thirteen')
     expect(code.threeDigitsToWord('065'), 'sixty-five')
@@ -59,3 +59,10 @@ describe('threeDigitsToWord', function(){
     expect(code.threeDigitsToWord('003'), 'three')
   })
 });
+
+describe('changeDollarArrayToWords', function(){
+  it('should iterate over an array and change each index of digits to words', function(){
+    expect(code.changeDollarArrayToWords('2523.04'), ['two', 'five hundred twenty-three'])
+    expect(code.splitDollarAmount('3432983.72'), ['three', 'four hundred thirty-two', 'nine hundred eighty-three'])
+  })
+})
