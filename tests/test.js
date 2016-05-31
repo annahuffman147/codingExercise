@@ -3,10 +3,10 @@ var code = require('../main.js')
 
 
 describe('changeToString', function(){
-  it('should change string to number', function(){
-    expect(code.changeToString(45)).to.equal('45')
-    expect(code.changeToString('35')).to.equal('is a string')
-    expect(code.changeToString('45.22')).to.equal('is a string')
+  it('should change amount to string', function(){
+    expect(code.changeToString(45), '45')
+    expect(code.changeToString('35'), '35')
+    expect(code.changeToString('45.22'), '45.22')
   })
 });
 
@@ -34,8 +34,8 @@ describe('singleDigitToWord', function(){
 
 describe('centsToFraction', function(){
   it('should change cents to fraction', function(){
-    expect(code.centsToFraction('04'), 'and 04/100 dollars')
-    expect(code.centsToFraction('00')).to.equal('dollars')
+    expect(code.centsToFraction('04'), ' and 04/100 dollars')
+    expect(code.centsToFraction('00')).to.equal(' dollars')
   })
 });
 
@@ -62,7 +62,7 @@ describe('threeDigitsToWord', function(){
 
 describe('changeDollarArrayToWords', function(){
   it('should iterate over an array and change each index of digits to words', function(){
-    expect(code.changeDollarArrayToWords('2523.04'), ['two', 'five hundred twenty-three'])
-    expect(code.changeDollarArrayToWords('3432983.72'), ['three', 'four hundred thirty-two', 'nine hundred eighty-three'])
+    expect(code.changeDollarArrayToWords('2523.04'), ['two thousand', 'five hundred twenty-three'])
+    expect(code.changeDollarArrayToWords('3432983.72'), ['three million', 'four hundred thirty-two thousand', 'nine hundred eighty-three'])
   })
 })
