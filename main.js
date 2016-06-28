@@ -1,6 +1,3 @@
-
-
-
 var singleDigits = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
 var tenToNineteen = ['ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen']
 var tensPlace = ['', 'ten', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety']
@@ -24,8 +21,7 @@ module.exports = {
       amount = amount + '.00'
     }
     var arrayOnDecimal = amount.split('.')
-    amount = arrayOnDecimal
-    return amount
+    return arrayOnDecimal
   },
 
   splitDollarAmount: function(amount){
@@ -72,34 +68,25 @@ module.exports = {
   threeDigitsToWord: function (threeDigits){
     if (threeDigits === '000') {
       threeDigits = ''
-      return
     } else if (threeDigits.substring(0, 2) === '00') {
       threeDigits = singleDigits[threeDigits.substring(2)]
-      return
     } else if (threeDigits.substring(0, 1)=== '0') {
         if (threeDigits.substring(2) === '0') {
           threeDigits = tensPlace[threeDigits.substring(1, 2)]
-          return
         } else if (threeDigits.substring(1, 2) == '1'){
           threeDigits = tenToNineteen[threeDigits.substring(2)]
-          return
         } else {
           threeDigits = tensPlace[threeDigits.substring(1, 2)] + '-' + singleDigits[threeDigits.substring(2)]
-          return
         }
     } else {
       if (threeDigits.substring(2) === '0') {
         threeDigits = singleDigits[threeDigits.substring(0, 1)] + ' hundred ' + tensPlace[threeDigits.substring(1, 2)]
-        return
       } else if (threeDigits.substring(1, 2) == '1'){
         threeDigits = singleDigits[threeDigits.substring(0, 1)] +' hundred ' + tenToNineteen[threeDigits.substring(2)]
-        return
       } else if (threeDigits.substring(1, 2) == '0'){
         threeDigits = singleDigits[threeDigits.substring(0, 1)] +' hundred ' + singleDigits[threeDigits.substring(2)]
-        return
       } else {
         threeDigits = singleDigits[threeDigits.substring(0, 1)] + ' hundred ' + tensPlace[threeDigits.substring(1, 2)] + '-' + singleDigits[threeDigits.substring(2)]
-        return
       }
     }
   },
@@ -108,6 +95,7 @@ module.exports = {
     var arrayDollarAmount = this.splitDollarAmount(amount)
     var cents = this.centsToFraction(amount)
     var arrayDollarWords = []
+    var threeDigitsFunction = this.threeDigitsToWord(amount)
     for (var i = 0; i < arrayDollarAmount.length; i++){
       var label = labels[(arrayDollarAmount.length-1-i)]
       if (arrayDollarAmount[i].length === 1) {
@@ -121,6 +109,7 @@ module.exports = {
           arrayDollarWords.push(tensPlace[arrayDollarAmount[i].substring(0, 1)] + '-' + singleDigits[arrayDollarAmount[i].substring(1)] + label)
         }
       } else {
+        // arrayDollarWords.push(threeDigitsToWord(arrayDollarAmount[i]))
         if (arrayDollarAmount[i] === '000') {
           arrayDollarWords.push('')
         } else if (arrayDollarAmount[i].substring(0, 2) === '00') {

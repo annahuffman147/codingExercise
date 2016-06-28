@@ -3,23 +3,28 @@ var code = require('../main.js')
 
 
 describe('changeToString', function(){
-  it('should change amount to string', function(){
+  it('should return a number as a string', function(){
     expect(code.changeToString(45), '45')
+  }),
+  it('should return the string amount as a string', function(){
     expect(code.changeToString('35'), '35')
-    expect(code.changeToString('45.22'), '45.22')
   })
 });
 
 describe('splitOnDecimal', function(){
-  it('should split number on decimal', function(){
+  it('should split number on decimal and return an array', function(){
     expect(code.splitOnDecimal('2523.04'),['2523', '04'])
+  }),
+  it('should add .00 to an even dollar amount then split number on decimal and return an array', function(){
     expect(code.splitOnDecimal('39'),['39', '00'])
   })
 });
 
 describe('splitDollarAmount', function(){
-  it('should split dollar amount into groups of three', function(){
+  it('should split into groups of 3 from the right - four digits create two strings, a single digit then a set of three', function(){
     expect(code.splitDollarAmount('2523.04'),['2','523'])
+  }),
+  it('should split dollar amount into groups of three', function(){
     expect(code.splitDollarAmount('3432983.72'),['3', '432', '983'])
   })
 });
@@ -27,7 +32,8 @@ describe('splitDollarAmount', function(){
 describe('singleDigitToWord', function(){
   it('should convert a single digit to a word', function(){
     expect(code.singleDigitToWord('1')).to.equal('one')
-    expect(code.singleDigitToWord('9')).to.equal('nine')
+  }),
+  it('should return nothing for numbers with more than one digit', function(){
     expect(code.singleDigitToWord('99')).to.equal()
   })
 });
