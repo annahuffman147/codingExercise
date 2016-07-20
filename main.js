@@ -8,8 +8,8 @@ module.exports = {
 
   changeToString: function (amount) {
     if (typeof amount !== 'string') {
-      amount = amount.toString();
-      return amount;
+      amount = amount.toString()
+      return amount
     } else {
       return amount
     }
