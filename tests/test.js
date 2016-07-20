@@ -11,12 +11,12 @@ describe('changeToString', function(){
   })
 });
 
-describe('splitOnDecimal', function(){
+describe('arrayOnDecimal', function(){
   it('should split number on decimal and return an array', function(){
-    expect(code.splitOnDecimal('2523.04'),['2523', '04'])
+    expect(code.arrayOnDecimal('2523.04'),['2523', '04'])
   }),
   it('should add .00 to an even dollar amount then split number on decimal and return an array', function(){
-    expect(code.splitOnDecimal('39'),['39', '00'])
+    expect(code.arrayOnDecimal('39'),['39', '00'])
   })
 });
 
@@ -42,6 +42,12 @@ describe('centsToFraction', function(){
   it('should change cents to fraction', function(){
     expect(code.centsToFraction('04'), ' and 04/100 dollars')
     expect(code.centsToFraction('00')).to.equal(' dollars')
+  })
+});
+
+describe('removeBeginningZeros', function(){
+  it('should remove zeros from the beginning of three digit groups and push value into a new array', function(){
+    expect(code.removeBeginningZeros('567004054'), ['567', '4', '54'])
   })
 });
 
