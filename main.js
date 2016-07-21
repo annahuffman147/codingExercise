@@ -7,132 +7,103 @@ var labels = ['', ' thousand ', ' million ', ' billion ']
 module.exports = {
 
   changeToString: function (amount) {
-    if (typeof amount !== 'string') {
-      amount = amount.toString()
-      return amount
+    return amount.toString()
+  },
+
+  checkForCents: function(amount){
+    var string = this.changeToString(amount)
+    if (string.indexOf('.') == -1) {
+      return string + '.00'
     } else {
-      return amount
+      return string
     }
   },
 
-  splitOnDecimal: function(amount) {
-    var changeToString = this.changeToString(amount)
-    if (amount.indexOf('.') == -1) {
-      amount = amount + '.00'
-    }
-    var arrayOnDecimal = amount.split('.')
-    return arrayOnDecimal
+  arrayOnDecimal: function(amount) {
+    return this.checkForCents(amount).split('.')
   },
-
-  splitDollarAmount: function(amount){
-    var arrayOnDecimal = this.splitOnDecimal(amount)
-    var dollarAmount = arrayOnDecimal[0]
-    var arrayDollarAmount = dollarAmount.split(/(?=(?:...)*$)/)
-    return arrayDollarAmount
-  },
-
-  singleDigitToWord: function (digit) {
-    if (digit.length === 1) {
-      digit = singleDigits[digit]
-      return digit
-    } else {
-      return
-    }
-  },
-
+// centsToFraction uses changeToString, checkForCents, and arrayOnDecimal. centsToFraction is used in the final result.
   centsToFraction: function (amount) {
     var denominator = '100'
-    var arrayDollarAmount = this.splitOnDecimal(amount)
-    var numerator = arrayDollarAmount[1]
-    if (numerator !== '00') {
-      var fraction = numerator + '/' + denominator;
-      return ' and ' + fraction + ' dollars';
+    var numerator = this.arrayOnDecimal(amount)[1]
+    var fraction = numerator + '/' + denominator
+    if (numerator === '00') {
+      return ' dollars'
     } else {
-      return ' dollars';
+      return ' and ' + fraction + ' dollars'
     }
   },
 
-  twoDigitsToWord: function(twoDigits){
-    if (twoDigits.substring(1) == '0') {
-      twoDigits = tensPlace[twoDigits.substring(0, 1)]
-      return twoDigits
-    } else if (twoDigits.substring(0, 1) == '1'){
-      twoDigits = tenToNineteen[twoDigits.substring(1)]
-      return twoDigits
-    } else {
-      twoDigits = tensPlace[twoDigits.substring(0, 1)] + '-' + singleDigits[twoDigits.substring(1)]
-      return twoDigits
-    }
+  // ---------------------------------
+
+  splitDollarAmount: function(amount){
+    var dollarAmount = this.arrayOnDecimal(amount)[0]
+    return dollarAmount.split(/(?=(?:\d\d\d)*$)/)
   },
 
-  threeDigitsToWord: function (threeDigits){
-    if (threeDigits === '000') {
-      threeDigits = ''
-    } else if (threeDigits.substring(0, 2) === '00') {
-      threeDigits = singleDigits[threeDigits.substring(2)]
-    } else if (threeDigits.substring(0, 1)=== '0') {
-        if (threeDigits.substring(2) === '0') {
-          threeDigits = tensPlace[threeDigits.substring(1, 2)]
-        } else if (threeDigits.substring(1, 2) == '1'){
-          threeDigits = tenToNineteen[threeDigits.substring(2)]
-        } else {
-          threeDigits = tensPlace[threeDigits.substring(1, 2)] + '-' + singleDigits[threeDigits.substring(2)]
-        }
-    } else {
-      if (threeDigits.substring(2) === '0') {
-        threeDigits = singleDigits[threeDigits.substring(0, 1)] + ' hundred ' + tensPlace[threeDigits.substring(1, 2)]
-      } else if (threeDigits.substring(1, 2) == '1'){
-        threeDigits = singleDigits[threeDigits.substring(0, 1)] +' hundred ' + tenToNineteen[threeDigits.substring(2)]
-      } else if (threeDigits.substring(1, 2) == '0'){
-        threeDigits = singleDigits[threeDigits.substring(0, 1)] +' hundred ' + singleDigits[threeDigits.substring(2)]
+  removeBeginningZeros: function(amount){
+    var noBeginningZerosArray = []
+    var splitDollarAmountArray =  this.splitDollarAmount(amount)
+    for (var i = 0; i < splitDollarAmountArray.length; i++) {
+      if (splitDollarAmountArray[i].substring(0, 2) == '00'){
+        noBeginningZerosArray.push(splitDollarAmountArray[i][2])
+      } else if (splitDollarAmountArray[i][0] == '0'){
+        noBeginningZerosArray.push(splitDollarAmountArray[i].substr(1, 2))
       } else {
-        threeDigits = singleDigits[threeDigits.substring(0, 1)] + ' hundred ' + tensPlace[threeDigits.substring(1, 2)] + '-' + singleDigits[threeDigits.substring(2)]
+        noBeginningZerosArray.push(splitDollarAmountArray[i])
       }
+    }
+    return noBeginningZerosArray
+  },
+
+  checkLength: function(index){
+    return index.length
+  },
+
+  singleDigitToWord: function (amount) {
+    return singleDigits[amount]
+  },
+
+  twoDigitsToWord: function(amount){
+    if (amount[1] == '0') {
+      return tensPlace[amount[0]]
+    } else if (amount[0] == '1'){
+      return tenToNineteen[amount[1]]
+    } else {
+      return tensPlace[amount[0]] + '-' + singleDigits[amount[1]]
+    }
+  },
+
+  threeDigitsToWord: function (amount){
+    var hundreds = singleDigits[amount[0]] + ' hundred '
+    var teens = tenToNineteen[amount[1]]
+    var singleNum = singleDigits[amount[2]]
+    var tens = tensPlace[amount[1]]
+
+    if (amount.substr(1, 2) == '00') {//300
+      return hundreds
+    } else if (amount.substr(1, 1) == '0'){//304
+      return hundreds + singleNum
+    } else if (amount.substr(2, 1) === '0') {//340
+      return hundreds + tens
+    } else if (amount.substr(1, 1) == '1'){//314
+      return hundreds + teens
+    } else {
+      return hundreds + tens + '-' + singleNum
     }
   },
 
   changeDollarArrayToWords: function (amount) {
-    var arrayDollarAmount = this.splitDollarAmount(amount)
-    var cents = this.centsToFraction(amount)
+    var finalArray = this.removeBeginningZeros(amount)
     var arrayDollarWords = []
-    var threeDigitsFunction = this.threeDigitsToWord(amount)
-    for (var i = 0; i < arrayDollarAmount.length; i++){
-      var label = labels[(arrayDollarAmount.length-1-i)]
-      if (arrayDollarAmount[i].length === 1) {
-        arrayDollarWords.push(singleDigits[arrayDollarAmount[i]] + label)
-      } else if (arrayDollarAmount[i].length === 2) {
-        if (arrayDollarAmount[i].substring(1) == '0') {
-          arrayDollarWords.push(tensPlace[arrayDollarAmount[i].substring(0, 1)] + label)
-        } else if (arrayDollarAmount[i].substring(0, 1) == '1'){
-          arrayDollarWords.push(tenToNineteen[arrayDollarAmount[i].substring(1)] + label)
-        } else {
-          arrayDollarWords.push(tensPlace[arrayDollarAmount[i].substring(0, 1)] + '-' + singleDigits[arrayDollarAmount[i].substring(1)] + label)
-        }
+    for (var i = 0; i < finalArray.length; i++){
+      var label = labels[(finalArray.length-1-i)]
+      if (finalArray[i].length === 1) {
+        arrayDollarWords.push(this.singleDigitToWord(finalArray[i]) + label)
+      } else if (finalArray[i].length === 2) {
+        arrayDollarWords.push(this.twoDigitsToWord(finalArray[i]) + label)
       } else {
-        // arrayDollarWords.push(threeDigitsToWord(arrayDollarAmount[i]))
-        if (arrayDollarAmount[i] === '000') {
-          arrayDollarWords.push('')
-        } else if (arrayDollarAmount[i].substring(0, 2) === '00') {
-          arrayDollarWords.push(singleDigits[arrayDollarAmount[i].substring(2)] + label)
-        } else if (arrayDollarAmount[i].substring(0, 1)=== '0') {
-            if (arrayDollarAmount[i].substring(2) === '0') {
-              arrayDollarWords.push(tensPlace[arrayDollarAmount[i].substring(1, 2)] + label)
-            } else if (arrayDollarAmount[i].substring(1, 2) == '1'){
-              arrayDollarWords.push(tenToNineteen[arrayDollarAmount[i].substring(2)] + label)
-            } else {
-              arrayDollarWords.push(tensPlace[arrayDollarAmount[i].substring(1, 2)] + '-' + singleDigits[arrayDollarAmount[i].substring(2)] + label)
-            }
-        } else {
-            if (arrayDollarAmount[i].substring(2) === '0') {
-              arrayDollarWords.push(singleDigits[arrayDollarAmount[i].substring(0, 1)] + ' hundred ' + tensPlace[arrayDollarAmount[i].substring(1, 2)] + label)
-            } else if (arrayDollarAmount[i].substring(1, 2) == '1'){
-              arrayDollarWords.push(singleDigits[arrayDollarAmount[i].substring(0, 1)] +' hundred ' + tenToNineteen[arrayDollarAmount[i].substring(2)] + label)
-            } else if (arrayDollarAmount[i].substring(1, 2) == '0'){
-              arrayDollarWords.push(singleDigits[arrayDollarAmount[i].substring(0, 1)] +' hundred ' + singleDigits[arrayDollarAmount[i].substring(2)] + label)
-            } else {
-              arrayDollarWords.push(singleDigits[arrayDollarAmount[i].substring(0, 1)] + ' hundred ' + tensPlace[arrayDollarAmount[i].substring(1, 2)] + '-' + singleDigits[arrayDollarAmount[i].substring(2)] + label)
-            }
-        }
+        arrayDollarWords.push(this.threeDigitsToWord(finalArray[i]) + label)
       }
     }
     return arrayDollarWords
@@ -141,8 +112,9 @@ module.exports = {
   printFinalResult: function (amount) {
     var arrayDollarWords = this.changeDollarArrayToWords(amount)
     var cents = this.centsToFraction(amount)
-    var concatString = arrayDollarWords.join().replace(/,/g, '') + cents
-    var finalAnswer = concatString.charAt(0).toUpperCase() + concatString.slice(1)
-    console.log(finalAnswer);
+    var concatString = arrayDollarWords.join('') + cents
+    var finalAnswer = concatString[0].toUpperCase() + concatString.slice(1)
+    console.log(finalAnswer)
   }
+
 }
